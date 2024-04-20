@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "579288361643",
+    "firebase_url": "https://madproj-a17b8-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "madproj-a17b8",
+    "storage_bucket": "madproj-a17b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579288361643:android:4780d10a5cfbbf58a7a5ee",
+        "android_client_info": {
+          "package_name": "com.example.mad1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBvMIdugF3kCyTYc3fIH-pD8KcflFw1n8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
