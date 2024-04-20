@@ -78,8 +78,7 @@ public class calcRideDistance extends AppCompatActivity implements OnMapReadyCal
     private static final double RATE_PER_KILOMETER = 1; // Rate per kilometer in RM
     private String formattedTotalCost;
     private boolean isPassenger;
-
-
+    private String apiKey;
 
 
     @Override
@@ -87,11 +86,14 @@ public class calcRideDistance extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc_ride_distance);
 
-        if (!Places.isInitialized()) {
-            String apiKey = ApiKeyManager.getGoogleMapsApiKey(this);
-            Places.initialize(getApplicationContext(), apiKey);
-        }
-        placesClient = Places.createClient(this);
+        ApiKeyManager.getGoogleMapsApiKey(this, apiKey -> {
+            // Use the fetched API key here
+            this.apiKey = apiKey;
+            if (!Places.isInitialized()) {
+                Places.initialize(getApplicationContext(), apiKey);
+            }
+            placesClient = Places.createClient(this);
+        });
 
         Intent intent = getIntent();
         userID = intent.getStringExtra("userId");
@@ -316,7 +318,7 @@ public class calcRideDistance extends AppCompatActivity implements OnMapReadyCal
                 @Override
                 public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                     if (charSequence.length() == 0) {
-                        // User cleared text, update your views or models as needed
+
                         locationTextView.setText("");
                         displayTextView.setText("");
                     }
@@ -350,13 +352,14 @@ public class calcRideDistance extends AppCompatActivity implements OnMapReadyCal
     private void triggerDistanceCalculation() {
         String origin = startLocation.getText().toString().trim();
         String destination = endLocation.getText().toString().trim();
+        Log.d("TriggerDistance", "Origin: " + origin + ", Destination: " + destination);
         if (!origin.isEmpty() && !destination.isEmpty()) {
             getDirections(origin, destination);
+
         }
     }
 
     private void getDirections(String origin, String destination) {
-        String apiKey = ApiKeyManager.getGoogleMapsApiKey(this);
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" +
                 origin + "&destination=" + destination + "&key=" + apiKey;
 
