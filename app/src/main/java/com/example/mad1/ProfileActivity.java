@@ -78,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String username = dataSnapshot.child("user_nickname").getValue(String.class);
                     String realName = dataSnapshot.child("user_realname").getValue(String.class);
-                    String mobileNo = formatPhoneNumber(dataSnapshot.child("user_phone").getValue(Long.class));
+                    String mobileNo = formatPhoneNumber(dataSnapshot.child("user_phone").getValue(String.class));
                     String email = dataSnapshot.child("user_email").getValue(String.class);
                     String gender = dataSnapshot.child("user_gender").getValue(String.class);
                     String profileImageUrl = dataSnapshot.child("user_photoURL").getValue(String.class);
@@ -164,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(ProfileActivity.this, "Failed to upload photo to Firebase Storage", Toast.LENGTH_SHORT).show();
                 });
     }
-    private String formatPhoneNumber(long phoneNumber) {
+    private String formatPhoneNumber(String phoneNumber) {
 
         String formattedPhoneNumber = "+60-" + phoneNumber;
         return formattedPhoneNumber;
